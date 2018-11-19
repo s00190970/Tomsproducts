@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent{
   title: string = "Toms Products";
 
   isLoggedIn: boolean;
@@ -23,9 +23,6 @@ export class NavbarComponent implements OnInit {
     this.auth.doLogout();
     this.isLoggedIn = this.auth.isLoggedIn();
     this.myRoute.navigate(["login"]);
-  }
-  
-  ngOnInit() {
   }
 
 }

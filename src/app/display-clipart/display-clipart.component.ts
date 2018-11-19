@@ -26,7 +26,6 @@ export class DisplayClipartComponent implements OnInit {
 
   //event to pass upwards the url of the image
   selectImage(imageStr): boolean{
-    console.log("using "+imageStr);
     this.addImageStringEE.emit(imageStr);
     return false;
   }

@@ -36,9 +36,7 @@ export class ProductService {
     this.products = this.productsCollection.snapshotChanges().pipe(
         map(actions => actions.map(a => {
             const data = a.payload.doc.data() as IProduct;
-            console.log("getProducts:data" + JSON.stringify(data));
             const id = a.payload.doc.id;
-            console.log("getProducts:id = "+id);
             return{id, ...data};
         }))
     );
@@ -50,9 +48,7 @@ export class ProductService {
   }
 
   deleteProduct(id:string): void{
-    this.productsCollection.doc(id).delete()
-    .catch(error=>{console.log("deleteProduct error:"+error);})
-    .then(() => console.log("deleteProduct: id = "+id));
+    this.productsCollection.doc(id).delete();
   }
 
   addAllProducts(){
@@ -60,8 +56,7 @@ export class ProductService {
           products => {
               this.allProducts = products;
               for(let product of this.allProducts){
-                  console.log("Adding:" + product.productName);
-                  this.productsCollection.add(product);
+                this.productsCollection.add(product);
               }
           },
           error => (this.errorMessage = <any>error)

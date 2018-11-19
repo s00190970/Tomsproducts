@@ -6,7 +6,7 @@ import { NotificationService } from '../service/notification.service';
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.css']
 })
-export class NotificationsComponent implements OnInit {
+export class NotificationsComponent{
   display: boolean = false;
   message: string;
   constructor(private notifier: NotificationService) {
@@ -22,8 +22,4 @@ export class NotificationsComponent implements OnInit {
      this.display = false;
      this.message = '';
    }
-
-  ngOnInit() {
-  }
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
@@ -8,7 +8,7 @@ import { AuthService } from '../service/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent{
   errorMessage: string;
   form;
 
@@ -18,9 +18,6 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
    }
-
-  ngOnInit() {
-  }
 
   login(){
     this.auth.doLogin(this.form.value).then(res => {

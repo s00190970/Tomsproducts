@@ -3,7 +3,7 @@
   {{pageTitle}}
   </h3>
   <div class='card-body'>
-    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && submitProduct(f)" novalidate>
+    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && submitProduct()" novalidate>
       <div class="form-group">
         <label for="inputProductName">Product Name</label>
         <input type="text" class="form-control" name="inputProductName" [(ngModel)]="productName" #inputProductName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && inputProductName.invalid }" required>
@@ -59,8 +59,10 @@
         <label for="inputImageUrl">Image URL</label>
         <input type="text" class="form-control" name="inputImageUrl" [(ngModel)]="imageUrl" #inputImageUrl="ngModel">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <button type="button" class="btn btn-secondary float-md-right" (click)="addMockData()">Add Mock Data</button>
+      <button type="submit" class="btn btn-success">Submit</button>
+      <button type="button" class="btn btn-info float-md-right" (click)="addMockData()">Add Mock Data</button>
+      <br>
+      <button type="button" class="btn btn-warning float-md-right" (click)="f.reset()">Clear form</button>
     </form>  
   </div>
 </div>

@@ -15,7 +15,7 @@ export class StarRatingComponent implements OnChanges {
 
   @Output() notify: EventEmitter<string> = new EventEmitter<string>();
   onClick(){
-    this.notify.emit("Clicked product rating: " + this.rating.toString());
+    this.notify.emit(`Clicked product rating: ${this.rating.toString()}`);
   }
 
   constructor() { }

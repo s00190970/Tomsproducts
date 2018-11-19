@@ -8,9 +8,9 @@
           <input type="text" class="form-control" [(ngModel)]='listFilter' placeholder="Filter by:" aria-label="Filter by:" aria-describedby="basic-addon1">
         </div>
         <h4 class="card-text">Filtered by: {{listFilter}}</h4>
-      <div class='table-responsive'>
-          <table class='table' *ngIf='products && products.length'>
-              <thead>
+      <div class='table-responsive table-striped'>
+          <table class='table texter-center' *ngIf='products && products.length'>
+              <thead class="thead-light">
                   <tr>
                       <th>
                           <button class='btn btn-primary' (click)='toggleImage()'>
@@ -43,7 +43,7 @@
                     </td>
                     <td>
                         <button id="remove" class="btn btn-danger" (click)="deleteProduct(product.id)">
-                            <i class="fa fa-trash"></i>Delete</button>
+                            <i class="fa fa-trash"></i></button>
                     </td>
                  </tr>
               </tbody>

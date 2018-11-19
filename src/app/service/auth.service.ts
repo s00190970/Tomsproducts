@@ -27,7 +27,7 @@ export class AuthService {
         this.sendEmailVerification();
         const message = 'A verification email has been sent, please check your email and follow the steps!';
         this.notifier.display(true, message);
-        return firebase.database().ref('users/' + res.user.uid).set({
+        return firebase.database().ref(`users/${res.user.uid}`).set({
           email: res.user.email,
           uid: res.user.uid,
           registrationDate: new Date().toString(),

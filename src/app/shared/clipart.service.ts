@@ -12,6 +12,6 @@ export class ClipartService{
     }
 
     getImageList(imageStr:string): Observable<IOpenClipArt>{
-        return this._http.get<IOpenClipArt>(this.url+imageStr);
+        return this._http.get<IOpenClipArt>(`${this.url}${imageStr}`);
     }
 }

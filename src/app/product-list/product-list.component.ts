@@ -33,7 +33,8 @@ export class ProductListComponent implements OnInit{
   }
 
   constructor(private _productService:ProductService){
-      //_productService.addAllProducts();
+      //_productService.addAllProducts(); // loading product list from JSON server to Firebase DB
+                                        // should be run once, when Firebase db is empty
 }
 
   performFilter(filterBy: string): IProduct[]{
@@ -54,7 +55,6 @@ export class ProductListComponent implements OnInit{
     error => this.errorMessage = <any>error); 
 }
 deleteProduct(id:number): void{
-    console.log("deleting product");
     this._productService.deleteProduct(id.toString());
 }
   

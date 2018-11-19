@@ -38,15 +38,12 @@ export class AddProductComponent {
   //receives the URL string from the display-cipart component
   //displays in the text box
   addImageStringToFormTextBox(evt):boolean{
-    console.log("using this url:" + evt);
     this.imageUrl = evt;
     return false;
   }
 
-  submitProduct(form){
+  submitProduct(){
    
-    console.log(form.value);
-
     let submittedProduct: IProduct =
       {
         productName: this.productName,
@@ -59,6 +56,7 @@ export class AddProductComponent {
 
       };
     this._productService.addProduct(submittedProduct);
+
     //redirect to the product-list component
     this.router.navigate(['/product-list']);
     }
@@ -66,7 +64,7 @@ export class AddProductComponent {
     addMockData():void{
       var faker = require('faker');
       let date = faker.date.past().toUTCString().substring(5,17);
-      this.productName = faker.commerce.productName();
+      this.productName = `Mock ${faker.commerce.productName()}`;
       this.productCode = faker.lorem.slug();
       this.releaseDate = date;
       this.description = faker.lorem.words();
