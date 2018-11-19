@@ -1,0 +1,67 @@
+<div class='card'>
+  <h3 class='card-header bg-primary text-white'>
+  {{pageTitle}}
+  </h3>
+  <div class='card-body'>
+    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && submitProduct(f)" novalidate>
+      <div class="form-group">
+        <label for="inputProductName">Product Name</label>
+        <input type="text" class="form-control" name="inputProductName" [(ngModel)]="productName" #inputProductName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && inputProductName.invalid }" required>
+        <div *ngIf="f.submitted && inputProductName.invalid" class="invalid-feedback">
+          <div *ngIf="inputProductName?.errors.required">Product Name is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputProductCode">Product Code</label>
+        <input type="text" class="form-control" name="inputProductCode" [(ngModel)]="productCode" #inputProductCode="ngModel" [ngClass]="{ 'is-invalid': f.submitted && inputProductCode.invalid }" required>
+        <div *ngIf="f.submitted && inputProductCode.invalid" class="invalid-feedback">
+          <div *ngIf="inputProductCode?.errors.required">Product Code is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputReleaseDate">Release Date</label>
+        <input type="text" class="form-control" name="inputReleaseDate" [(ngModel)]="releaseDate" #inputReleaseDate="ngModel" [ngClass]="{ 'is-invalid': f.submitted && inputReleaseDate.invalid }" required>
+        <div *ngIf="f.submitted && inputReleaseDate.invalid" class="invalid-feedback">
+          <div *ngIf="inputReleaseDate?.errors.required">Release Date is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputDescription">Description</label>
+        <input type="text" class="form-control" name="inputDescription" [(ngModel)]="description" #inputDescription="ngModel" [ngClass]="{ 'is-invalid': f.submitted && inputDescription.invalid }" required>
+        <div *ngIf="f.submitted && inputDescription.invalid" class="invalid-feedback">
+          <div *ngIf="inputDescription?.errors.required">Product Description is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPrice">Price</label>
+        <input type="number" class="form-control" name="inputPrice" [(ngModel)]="price" #inputPrice="ngModel" [ngClass]="{ 'is-invalid': f.submitted && inputPrice.invalid }" required>
+        <div *ngIf="f.submitted && inputPrice.invalid" class="invalid-feedback">
+          <div *ngIf="inputPrice?.errors.required">Product Price is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputStarRating">Star Rating</label>
+        <input type="number" class="form-control" name="inputStarRating" [(ngModel)]="starRating" #inputStarRating="ngModel" [ngClass]="{ 'is-invalid': f.submitted && inputStarRating.invalid }" required>
+        <div *ngIf="f.submitted && inputStarRating.invalid" class="invalid-feedback">
+          <div *ngIf="inputStarRating?.errors.required">Product Star Rating is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputImageStr">Enter Image String</label>
+        <input type="text" class="form-control" name="inputImageStr" [(ngModel)]="imageStr" #inputImageStr="ngModel">
+        <button type="button" class="btn btn-primary" (click)="showHideDisplayClipartComponent()">Find Images</button>
+      </div>
+      <div class="form-group">
+        <app-display-clipart (addImageStringEE)="addImageStringToFormTextBox($event)" *ngIf='showDisplayClipartComponent'
+        [imageStr]='imageStr'></app-display-clipart>
+      </div>
+      <div class="form-group">
+        <label for="inputImageUrl">Image URL</label>
+        <input type="text" class="form-control" name="inputImageUrl" [(ngModel)]="imageUrl" #inputImageUrl="ngModel">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" class="btn btn-secondary float-md-right" (click)="addMockData()">Add Mock Data</button>
+    </form>  
+  </div>
+</div>
+
