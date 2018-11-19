@@ -14,11 +14,9 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button (click)="login()" class="loginBtn" color="primary">Login</button>
-  </mat-card-actions>
-  <mat-card-actions>
-    <button mat-raised-button class="fbBtn" (click)="fbLogin()"><i class="fab fa-facebook-square" ></i>Login with Facebook</button>
-    <button mat-raised-button class="googleBtn" (click)="googleLogin()"><i class="fab fa-google-plus-square"></i>Login with Google</button>
-    <button mat-raised-button class="githubBtn" (click)="githubLogin()"><i class="fab fa-github"></i>Login with Github</button>
+    <button mat-raised-button (click)="login()" class="loginBtn" color="accent">Login</button>
+    <button mat-raised-button class="fbBtn" (click)="fbLogin()"><i class="fab fa-facebook-square" ></i>Login</button>
+    <button mat-raised-button class="googleBtn" (click)="googleLogin()"><i class="fab fa-google-plus-square"></i>Login</button>
+    <button mat-raised-button class="githubBtn" (click)="githubLogin()"><i class="fab fa-github"></i>Login</button>
   </mat-card-actions>
 </mat-card>
