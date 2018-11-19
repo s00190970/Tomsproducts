@@ -11,10 +11,21 @@ import * as firebase from 'firebase/';
 export class AuthService {
   
   private user: Observable<firebase.User>;
+  private username = "user";
   loggedInStatus: boolean = false; 
 
   constructor(private _firebaseAuth: AngularFireAuth, private router: Router, private notifier: NotificationService) {
     this.user = _firebaseAuth.authState;
+  }
+
+  getUsername(): string {
+    if(firebase.auth().currentUser){
+      if(firebase.auth().currentUser.displayName!==null){
+        return firebase.auth().currentUser.displayName;
+      }
+      return firebase.auth().currentUser.email;
+    }
+    return this.username;
   }
 
   signup(email: string, password: string, name: string) {
@@ -27,19 +38,18 @@ export class AuthService {
         this.sendEmailVerification();
         const message = 'A verification email has been sent, please check your email and follow the steps!';
         this.notifier.display(true, message);
+        console.log("name: "+name);
         return firebase.database().ref(`users/${res.user.uid}`).set({
           email: res.user.email,
           uid: res.user.uid,
           registrationDate: new Date().toString(),
-          name: name
-        })
-          .then(() => {
-            firebase.auth().signOut();
-            this.router.navigate(['login']);
-          });
+          displayName: name
+        });
+        
       })
       .catch(err => {
-        console.log(err);
+        if(err.message==="The email address is already in use by another account.")
+          alert(err.message);
         this.notifier.display(true, err.message);
       });
   }
@@ -53,7 +63,7 @@ export class AuthService {
     });
   }
 
-  doRegister(value){
+  doRegister(value):Promise<any>{
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
       .then(res => {

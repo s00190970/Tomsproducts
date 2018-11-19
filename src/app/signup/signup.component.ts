@@ -1,21 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent{
 
   email: string;
   pwd: string;
   pwd2: string;
   name: string;
-  constructor(private auth: AuthService) { }
-
-  ngOnInit() {
-  }
+  constructor(private auth: AuthService, private myRoute: Router) { }
 
   passwordNotMatch() { // here we have the 'passwords' group
   if(this.pwd!==this.pwd2){
@@ -30,8 +28,7 @@ export class SignupComponent implements OnInit {
     }
     else{
       this.auth.signup(this.email,this.pwd, this.name);
-      console.log(this.email);
-      console.log(this.pwd);
+      this.myRoute.navigate(['login']);
     }
   }
 

@@ -23,9 +23,9 @@ export class LoginComponent{
     this.auth.doLogin(this.form.value).then(res => {
       this.myRoute.navigate(['product-list']);
     }, err => {
-      console.log(err);
+      alert(`Wrong username or password!`);
       this.errorMessage = err.message;
-    })
+    });
   }
   fbLogin(){
     this.auth.doFacebookLogin().then(res => {
