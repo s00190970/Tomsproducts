@@ -80,7 +80,7 @@ export class AddProductComponent {
       for(let i=0;i<4;i++){
         output+=possible.charAt(Math.floor(Math.random() * possible.length));
       }
-      output+=" 0";
+      output+=" ";
       for(let i=0;i<4;i++){
         output+=(Math.floor(Math.random() * 10)).toString();
       }
