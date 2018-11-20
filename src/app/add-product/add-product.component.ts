@@ -24,6 +24,7 @@ export class AddProductComponent {
   price: number;
   starRating: number;
   imageUrl: string;
+  imageStr:string;
 
   constructor(private _productService:ProductService, private router: Router){
 
@@ -58,19 +59,32 @@ export class AddProductComponent {
     this._productService.addProduct(submittedProduct);
 
     //redirect to the product-list component
-    this.router.navigate(['/product-list']);
+    this.router.navigate(['/product-list']); 
     }
 
     addMockData():void{
       var faker = require('faker');
       let date = faker.date.past().toUTCString().substring(5,17);
       this.productName = `Mock ${faker.commerce.productName()}`;
-      this.productCode = faker.lorem.slug();
+      this.productCode = this.randomProductCodeGenerator();
       this.releaseDate = date;
       this.description = faker.lorem.words();
-      this.price = faker.random.number();
+      this.price = Math.floor(Math.random() * 500) + 1;
       this.starRating = Math.floor(Math.random() * 5) + 1;
-      this.imageUrl = faker.image.technics();
+      this.imageStr = this.productName.substring(this.productName.lastIndexOf(' ')+1);
+    }
+
+    randomProductCodeGenerator():string{
+      let output = "";
+      let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      for(let i=0;i<4;i++){
+        output+=possible.charAt(Math.floor(Math.random() * possible.length));
+      }
+      output+=" 0";
+      for(let i=0;i<4;i++){
+        output+=(Math.floor(Math.random() * 10)).toString();
+      }
+      return output;
     }
     
   }
