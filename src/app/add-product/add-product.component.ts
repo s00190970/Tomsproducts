@@ -3,6 +3,7 @@ import { IProduct } from '../product-list/product';
 import { ProductService } from '../shared/product.service';
 import { Router } from "@angular/router";
 import * as faker from 'faker';
+import { AuthService } from '../service/auth.service';
 
 declare var require: any;
 
@@ -26,8 +27,7 @@ export class AddProductComponent {
   imageUrl: string;
   imageStr:string;
 
-  constructor(private _productService:ProductService, private router: Router){
-
+  constructor(private _productService:ProductService, private router: Router, private auth: AuthService){
   } 
 
   //controls hiding the component until the button is pressed
@@ -41,6 +41,10 @@ export class AddProductComponent {
   addImageStringToFormTextBox(evt):boolean{
     this.imageUrl = evt;
     return false;
+  }
+
+  addToUser(){
+    this.auth.setUserData();
   }
 
   submitProduct(){
@@ -65,7 +69,7 @@ export class AddProductComponent {
     addMockData():void{
       var faker = require('faker');
       let date = faker.date.past().toUTCString().substring(5,17);
-      this.productName = `Mock ${faker.commerce.productName()}`;
+      this.productName = `[Mock] ${faker.commerce.productName()}`;
       this.productCode = this.randomProductCodeGenerator();
       this.releaseDate = date;
       this.description = faker.lorem.words();

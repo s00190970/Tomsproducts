@@ -11,6 +11,7 @@ export class ProductListComponent implements OnInit{
     
   pageTitle : string = "Tom's Products";
   imageWidth: number = 50;
+  imageHeigth: number = 50;
   imageMargin: number = 2;
   showImage: boolean = true;
   errorMessage: any;

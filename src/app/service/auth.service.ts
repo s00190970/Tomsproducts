@@ -18,7 +18,7 @@ export class AuthService {
     this.user = _firebaseAuth.authState;
   }
 
-  getUsername(): string {
+  getUsername(): string { 
     if(firebase.auth().currentUser){
       if(firebase.auth().currentUser.displayName!==null){
         return firebase.auth().currentUser.displayName;
@@ -39,19 +39,31 @@ export class AuthService {
         const message = 'A verification email has been sent, please check your email and follow the steps!';
         this.notifier.display(true, message);
         console.log("name: "+name);
-        return firebase.database().ref(`users/${res.user.uid}`).set({
+        var userRef = firebase.database().ref(`/users/${res.user.uid}`);
+        var newUser = userRef.push();
+        console.log(newUser.toString());
+        return newUser.set({
           email: res.user.email,
           uid: res.user.uid,
           registrationDate: new Date().toString(),
           displayName: name
         });
-        
       })
       .catch(err => {
         if(err.message==="The email address is already in use by another account.")
           alert(err.message);
         this.notifier.display(true, err.message);
       });
+  }
+
+  setUserData(){
+    this.user.subscribe(data=>{
+      console.log(data.uid);
+      var uid = data.uid;
+      firebase.database().ref(`/users/${uid}`).set(({
+        color: 'green'
+      }))
+    })
   }
 
   sendEmailVerification() {

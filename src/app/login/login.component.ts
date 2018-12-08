@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import { HttpRequest, HttpClient } from '@angular/common/http';
+import { Http, Headers } from '@angular/http';
+
 
 @Component({
   selector: 'app-login',
@@ -11,13 +14,12 @@ import { AuthService } from '../service/auth.service';
 export class LoginComponent{
   errorMessage: string;
   form;
-
-  constructor(private fb:FormBuilder, private myRoute: Router, private auth: AuthService) {
+  constructor(private fb:FormBuilder, private myRoute: Router, private auth: AuthService, private http: HttpClient) {
     this.form = fb.group({
       email:['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-   }
+ }
 
   login(){
     this.auth.doLogin(this.form.value).then(res => {
